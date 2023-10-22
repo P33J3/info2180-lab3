@@ -19,6 +19,8 @@ window.onload = () => {
 
     let evenOdd = 1;
     let winner = false;
+    const newP = document.createElement("p");
+    let newMsg = document.createTextNode("");
     divClasses.forEach((div) => {
         div.addEventListener("click", () => {
             if (evenOdd % 2 === 1) {
@@ -52,20 +54,20 @@ window.onload = () => {
                     }
                 }
             console.log('X', gameStateX, 'O', gameStateO);
-            const newP = document.createElement("p");
+
 
             if(!winner) {
                 for(let i=0; i<combos.length; i++) {
                     if(combos[i].every(cell => gameStateX.includes(cell))) {
-                        let newMsg = document.createTextNode("Congratulations! X is the Winner!");
+                        newMsg = document.createTextNode("Congratulations! X is the Winner!");
                         newP.appendChild(newMsg);
                         document.getElementById('status').appendChild(newP);
                         document.getElementById('status').classList.add('you-won')
                         winner = true;
                     }
                     if(combos[i].every(cell => gameStateO.includes(cell))) {
-                        let newMsg0 = document.createTextNode("Congratulations! O is the Winner!");
-                        newP.appendChild(newMsg0);
+                        newMsg = document.createTextNode("Congratulations! O is the Winner!");
+                        newP.appendChild(newMsg);
                         document.getElementById('status').appendChild(newP);
                         document.getElementById('status').classList.add('you-won')
                         winner = true;
@@ -97,6 +99,25 @@ window.onload = () => {
         ['cell2', 'cell5', 'cell8'],
         ['cell3', 'cell6', 'cell9'],
     ]
+
+    let restartBtn = document.querySelector(".controls > .btn");
+    restartBtn.addEventListener("click", () => {
+        cellNum = 0;
+        divClasses.forEach((div) => {
+            div.innerHTML = '';
+            div.classList.remove(`cell${++cellNum}`);
+            div.classList.remove("X");
+            div.classList.remove(`O`);
+        });
+        document.getElementById('status').removeChild(newP);
+        newP.removeChild(newMsg);
+        document.getElementById('status').classList.remove('you-won');
+        gameStateX = [];
+        gameStateO = [];
+        winner = false;
+
+
+    })
 
 
 }
