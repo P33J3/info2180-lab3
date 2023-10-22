@@ -23,14 +23,16 @@ window.onload = () => {
     let newMsg = document.createTextNode("");
     divClasses.forEach((div) => {
         div.addEventListener("click", () => {
-            if (evenOdd % 2 === 1) {
+            if (div.innerHTML === ""){
+                if (evenOdd % 2 === 1) {
 
-                div.innerHTML = 'X';
-                evenOdd++;
+                    div.innerHTML = 'X';
+                    evenOdd++;
 
-            } else {
-                div.innerHTML = 'O';
-                evenOdd++;
+                } else {
+                    div.innerHTML = 'O';
+                    evenOdd++;
+                }
             }
 
             if (div.innerHTML === 'X') {
@@ -53,7 +55,7 @@ window.onload = () => {
                         }
                     }
                 }
-            console.log('X', gameStateX, 'O', gameStateO);
+            // console.log('X', gameStateX, 'O', gameStateO);
 
 
             if(!winner) {
